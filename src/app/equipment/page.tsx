@@ -52,6 +52,54 @@ const equipmentData = [
     imageUrl: "/images/excavator-hitachi.jpg",
     slug: "excavator-hitachi-zx330",
     category: "excavators"
+  },
+  {
+    title: "Автокран Галичанин КС-55713",
+    description: "Надежный автокран грузоподъемностью 25 тонн. Длина стрелы 21.7 м. Идеален для работы в стесненных условиях городской застройки.",
+    price: "от 12 000 ₽/смена",
+    imageUrl: "/images/crane-galichanin.jpg",
+    slug: "crane-galichanin-ks55713",
+    category: "cranes"
+  },
+  {
+    title: "Фронтальный погрузчик XCMG LW300FN",
+    description: "Универсальный погрузчик с объемом ковша 1.8 м³. Грузоподъемность 3 тонны. Отлично подходит для погрузочно-разгрузочных работ.",
+    price: "от 11 000 ₽/смена",
+    imageUrl: "/images/loader-xcmg.jpg",
+    slug: "loader-xcmg-lw300fn",
+    category: "loaders"
+  },
+  {
+    title: "Мини-экскаватор Komatsu PC55MR",
+    description: "Компактный экскаватор для работы в ограниченном пространстве. Глубина копания 3.8 м, ширина ковша 0.4 м.",
+    price: "от 9 000 ₽/смена",
+    imageUrl: "/images/mini-excavator-komatsu.jpg",
+    slug: "mini-excavator-komatsu-pc55",
+    category: "excavators"
+  },
+  {
+    title: "Каток дорожный HAMM HD 12 VV",
+    description: "Двухвальцовый виброкаток массой 3 тонны. Идеален для уплотнения асфальта и других покрытий на небольших площадях.",
+    price: "от 8 000 ₽/смена",
+    imageUrl: "/images/roller-hamm.jpg",
+    slug: "roller-hamm-hd12",
+    category: "rollers"
+  },
+  {
+    title: "Автогрейдер ДЗ-98",
+    description: "Мощный грейдер для планировки и профилирования дорог. Ширина отвала 3.7 м, мощность двигателя 180 л.с.",
+    price: "от 14 000 ₽/смена",
+    imageUrl: "/images/grader-dz98.jpg",
+    slug: "grader-dz98",
+    category: "graders"
+  },
+  {
+    title: "Гидромолот JCB HM033T",
+    description: "Мощный гидромолот для разрушения бетона, асфальта и скальных пород. Энергия удара 3000 Дж.",
+    price: "от 5 000 ₽/смена",
+    imageUrl: "/images/hammer-jcb.jpg",
+    slug: "hammer-jcb-hm033t",
+    category: "attachments"
   }
 ];
 
@@ -60,7 +108,11 @@ const categories = [
   { id: "cranes", name: "Краны" },
   { id: "excavators", name: "Экскаваторы" },
   { id: "trucks", name: "Самосвалы" },
-  { id: "bulldozers", name: "Бульдозеры" }
+  { id: "bulldozers", name: "Бульдозеры" },
+  { id: "loaders", name: "Погрузчики" },
+  { id: "rollers", name: "Катки" },
+  { id: "graders", name: "Грейдеры" },
+  { id: "attachments", name: "Навесное оборудование" }
 ];
 
 export default function Equipment() {

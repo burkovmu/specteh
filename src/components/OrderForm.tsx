@@ -6,10 +6,11 @@ import { motion } from "framer-motion";
 interface OrderFormProps {
   isOpen: boolean;
   onClose: () => void;
+  isSimpleForm?: boolean;
   equipmentTitle?: string;
 }
 
-export default function OrderForm({ isOpen, onClose, equipmentTitle }: OrderFormProps) {
+export default function OrderForm({ isOpen, onClose, isSimpleForm = false, equipmentTitle }: OrderFormProps) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -24,6 +25,14 @@ export default function OrderForm({ isOpen, onClose, equipmentTitle }: OrderForm
     // В реальном проекте здесь будет отправка данных на сервер
     console.log("Form submitted:", formData);
     alert("Спасибо за заявку! Мы свяжемся с вами в ближайшее время.");
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      equipment: "",
+      rentalPeriod: "",
+      message: "",
+    });
     onClose();
   };
 
@@ -51,7 +60,9 @@ export default function OrderForm({ isOpen, onClose, equipmentTitle }: OrderForm
           </svg>
         </button>
 
-        <h2 className="text-2xl font-bold mb-6 text-white">Заказать технику</h2>
+        <h2 className="text-2xl font-bold mb-6 text-white">
+          {isSimpleForm ? "Обратная связь" : "Заказать технику"}
+        </h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -86,71 +97,75 @@ export default function OrderForm({ isOpen, onClose, equipmentTitle }: OrderForm
             />
           </div>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="example@mail.ru"
-            />
-          </div>
+          {!isSimpleForm && (
+            <>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  placeholder="example@mail.ru"
+                />
+              </div>
 
-          <div>
-            <label htmlFor="equipment" className="block text-sm font-medium text-gray-300 mb-1">
-              Техника *
-            </label>
-            <input
-              type="text"
-              id="equipment"
-              name="equipment"
-              required
-              value={formData.equipment}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Название техники"
-            />
-          </div>
+              <div>
+                <label htmlFor="equipment" className="block text-sm font-medium text-gray-300 mb-1">
+                  Техника *
+                </label>
+                <input
+                  type="text"
+                  id="equipment"
+                  name="equipment"
+                  required
+                  value={formData.equipment}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  placeholder="Название техники"
+                />
+              </div>
 
-          <div>
-            <label htmlFor="rentalPeriod" className="block text-sm font-medium text-gray-300 mb-1">
-              Срок аренды *
-            </label>
-            <select
-              id="rentalPeriod"
-              name="rentalPeriod"
-              required
-              value={formData.rentalPeriod}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            >
-              <option value="">Выберите срок</option>
-              <option value="1-day">1 день</option>
-              <option value="week">Неделя</option>
-              <option value="month">Месяц</option>
-              <option value="long-term">Долгосрочная аренда</option>
-            </select>
-          </div>
+              <div>
+                <label htmlFor="rentalPeriod" className="block text-sm font-medium text-gray-300 mb-1">
+                  Срок аренды *
+                </label>
+                <select
+                  id="rentalPeriod"
+                  name="rentalPeriod"
+                  required
+                  value={formData.rentalPeriod}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                >
+                  <option value="">Выберите срок</option>
+                  <option value="1-day">1 день</option>
+                  <option value="week">Неделя</option>
+                  <option value="month">Месяц</option>
+                  <option value="long-term">Долгосрочная аренда</option>
+                </select>
+              </div>
 
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
-              Дополнительная информация
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={3}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Укажите детали заказа"
-            />
-          </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+                  Дополнительная информация
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={3}
+                  className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  placeholder="Укажите детали заказа"
+                />
+              </div>
+            </>
+          )}
 
           <motion.button
             whileHover={{ scale: 1.02 }}

@@ -25,14 +25,18 @@ export default function Home() {
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Профессиональная техника для ваших строительных и промышленных проектов
           </p>
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOrderFormOpen(true)}
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-8 rounded-full text-lg"
+            className="flex justify-center"
           >
-            Заказать технику
-          </motion.button>
+            <Link
+              href="/equipment"
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-8 rounded-full text-lg inline-block"
+            >
+              Заказать технику
+            </Link>
+          </motion.div>
         </motion.div>
         
         <motion.div
@@ -143,6 +147,7 @@ export default function Home() {
       <OrderForm
         isOpen={isOrderFormOpen}
         onClose={() => setIsOrderFormOpen(false)}
+        isSimpleForm={false}
       />
     </main>
   );
