@@ -30,6 +30,7 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
+                    onClick={() => setIsOpen(false)}
                     className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     {item.name}
@@ -73,6 +74,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={() => setIsOpen(false)}
                 className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
                 {item.name}
