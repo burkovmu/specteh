@@ -7,112 +7,96 @@ import EquipmentCard from "@/components/EquipmentCard";
 const equipmentData = [
   {
     title: "Автокран Liebherr LTM 1090",
-    description: "Мощный автокран грузоподъемностью 90 тонн. Идеально подходит для монтажных работ любой сложности. Оснащен современной системой управления и безопасности.",
+    description: "Мощный автокран грузоподъемностью 90 тонн для выполнения сложных монтажных работ. Оснащен современной системой управления LICCON.",
     price: "от 18 000 ₽/смена",
     imageUrl: "/images/crane-liebherr.jpg",
     slug: "crane-liebherr-ltm-1090",
-    category: "cranes"
+    category: "Краны и автовышки"
   },
   {
-    title: "Экскаватор-погрузчик JCB 3CX",
-    description: "Универсальный экскаватор-погрузчик для земляных и погрузочных работ. Глубина копания до 5.97 м, объем фронтального ковша 1.1 м³.",
-    price: "от 12 500 ₽/смена",
-    imageUrl: "/images/excavator-jcb.jpg",
-    slug: "excavator-jcb-3cx",
-    category: "excavators"
-  },
-  {
-    title: "Бульдозер Komatsu D65",
-    description: "Мощный бульдозер для планировки площадок и перемещения грунта. Мощность двигателя 205 л.с., объем отвала 3.89 м³.",
-    price: "от 15 000 ₽/смена",
-    imageUrl: "/images/bulldozer-komatsu.jpg",
-    slug: "bulldozer-komatsu-d65",
-    category: "bulldozers"
-  },
-  {
-    title: "Самосвал КАМАЗ 6520",
-    description: "Надежный самосвал грузоподъемностью 20 тонн. Идеален для перевозки сыпучих материалов и строительного мусора.",
-    price: "от 10 000 ₽/смена",
-    imageUrl: "/images/kamaz-6520.jpg",
-    slug: "dump-truck-kamaz-6520",
-    category: "trucks"
-  },
-  {
-    title: "Автовышка ВИПО-36",
-    description: "Телескопическая автовышка с высотой подъема 36 метров. Применяется для высотных монтажных и ремонтных работ.",
-    price: "от 14 000 ₽/смена",
-    imageUrl: "/images/aerial-platform.jpg",
-    slug: "aerial-platform-vipo-36",
-    category: "cranes"
-  },
-  {
-    title: "Гусеничный экскаватор Hitachi ZX330",
-    description: "Мощный экскаватор для крупных земляных работ. Эксплуатационная масса 33 тонны, объем ковша 1.4 м³.",
-    price: "от 16 000 ₽/смена",
-    imageUrl: "/images/excavator-hitachi.jpg",
-    slug: "excavator-hitachi-zx330",
-    category: "excavators"
-  },
-  {
-    title: "Автокран Галичанин КС-55713",
-    description: "Надежный автокран грузоподъемностью 25 тонн. Длина стрелы 21.7 м. Идеален для работы в стесненных условиях городской застройки.",
+    title: "Автокран Ивановец КС-45717",
+    description: "Надежный автокран грузоподъемностью 25 тонн. Идеален для работы в городских условиях благодаря компактным размерам.",
     price: "от 12 000 ₽/смена",
-    imageUrl: "/images/crane-galichanin.jpg",
-    slug: "crane-galichanin-ks55713",
-    category: "cranes"
+    imageUrl: "/images/crane-ivanovec.jpg",
+    slug: "crane-ivanovec-ks45717",
+    category: "Краны и автовышки"
   },
   {
-    title: "Фронтальный погрузчик XCMG LW300FN",
-    description: "Универсальный погрузчик с объемом ковша 1.8 м³. Грузоподъемность 3 тонны. Отлично подходит для погрузочно-разгрузочных работ.",
-    price: "от 11 000 ₽/смена",
-    imageUrl: "/images/loader-xcmg.jpg",
-    slug: "loader-xcmg-lw300fn",
-    category: "loaders"
-  },
-  {
-    title: "Мини-экскаватор Komatsu PC55MR",
-    description: "Компактный экскаватор для работы в ограниченном пространстве. Глубина копания 3.8 м, ширина ковша 0.4 м.",
-    price: "от 9 000 ₽/смена",
-    imageUrl: "/images/mini-excavator-komatsu.jpg",
-    slug: "mini-excavator-komatsu-pc55",
-    category: "excavators"
-  },
-  {
-    title: "Каток дорожный HAMM HD 12 VV",
-    description: "Двухвальцовый виброкаток массой 3 тонны. Идеален для уплотнения асфальта и других покрытий на небольших площадях.",
-    price: "от 8 000 ₽/смена",
-    imageUrl: "/images/roller-hamm.jpg",
-    slug: "roller-hamm-hd12",
-    category: "rollers"
-  },
-  {
-    title: "Автогрейдер ДЗ-98",
-    description: "Мощный грейдер для планировки и профилирования дорог. Ширина отвала 3.7 м, мощность двигателя 180 л.с.",
+    title: "Экскаватор Volvo EC220D",
+    description: "Гусеничный экскаватор с мощным двигателем и высокой производительностью. Отлично подходит для земляных работ любой сложности.",
     price: "от 14 000 ₽/смена",
-    imageUrl: "/images/grader-dz98.jpg",
-    slug: "grader-dz98",
-    category: "graders"
+    imageUrl: "/images/excavator-volvo.jpg",
+    slug: "excavator-volvo-ec220d",
+    category: "Экскаваторы"
   },
   {
-    title: "Гидромолот JCB HM033T",
-    description: "Мощный гидромолот для разрушения бетона, асфальта и скальных пород. Энергия удара 3000 Дж.",
-    price: "от 5 000 ₽/смена",
-    imageUrl: "/images/hammer-jcb.jpg",
-    slug: "hammer-jcb-hm033t",
-    category: "attachments"
+    title: "Бульдозер Б10М",
+    description: "Мощный промышленный бульдозер для планировки площадок, перемещения грунта и строительных материалов.",
+    price: "от 12 000 ₽/смена",
+    imageUrl: "/images/bulldozer-b10m.jpg",
+    slug: "bulldozer-b10m",
+    category: "Бульдозеры"
+  },
+  {
+    title: "Самосвал МАЗ-5516",
+    description: "Надежный самосвал грузоподъемностью 20 тонн для перевозки сыпучих грузов и строительных материалов.",
+    price: "от 9 000 ₽/смена",
+    imageUrl: "/images/maz-5516.jpg",
+    slug: "dump-truck-maz5516",
+    category: "Самосвалы"
+  },
+  {
+    title: "Автовышка ПСС-131.17Э",
+    description: "Автогидроподъемник с высотой подъема 17 метров для выполнения высотных монтажных и ремонтных работ.",
+    price: "от 8 000 ₽/смена",
+    imageUrl: "/images/aerial-platform-pss.jpg",
+    slug: "aerial-platform-pss131",
+    category: "Краны и автовышки"
+  },
+  {
+    title: "Фронтальный погрузчик SDLG LG936L",
+    description: "Универсальный погрузчик с объемом ковша 1.8 м³ для погрузочно-разгрузочных работ и перемещения сыпучих материалов.",
+    price: "от 10 000 ₽/смена",
+    imageUrl: "/images/loader-sdlg.jpg",
+    slug: "loader-sdlg-lg936l",
+    category: "Погрузчики"
+  },
+  {
+    title: "Каток дорожный BOMAG BW 213",
+    description: "Грунтовый виброкаток для уплотнения различных типов грунта и асфальтобетонных смесей.",
+    price: "от 11 000 ₽/смена",
+    imageUrl: "/images/roller-bomag.jpg",
+    slug: "roller-bomag-bw213",
+    category: "Катки"
+  },
+  {
+    title: "Автогрейдер ГС-14.02",
+    description: "Современный автогрейдер для профилирования дорог, планировки площадок и перемещения грунта.",
+    price: "от 13 000 ₽/смена",
+    imageUrl: "/images/grader-gs14.jpg",
+    slug: "grader-gs14",
+    category: "Грейдеры"
+  },
+  {
+    title: "Гидробур Delta RD-15",
+    description: "Мощный гидравлический бур для бурения скважин различного диаметра в грунтах разной плотности.",
+    price: "от 7 000 ₽/смена",
+    imageUrl: "/images/auger-delta.jpg",
+    slug: "auger-delta-rd15",
+    category: "Навесное оборудование"
   }
 ];
 
 const categories = [
-  { id: "all", name: "Все" },
-  { id: "cranes", name: "Краны" },
-  { id: "excavators", name: "Экскаваторы" },
-  { id: "trucks", name: "Самосвалы" },
-  { id: "bulldozers", name: "Бульдозеры" },
-  { id: "loaders", name: "Погрузчики" },
-  { id: "rollers", name: "Катки" },
-  { id: "graders", name: "Грейдеры" },
-  { id: "attachments", name: "Навесное оборудование" }
+  "Все",
+  "Краны и автовышки",
+  "Экскаваторы",
+  "Самосвалы",
+  "Бульдозеры",
+  "Погрузчики",
+  "Катки",
+  "Грейдеры",
+  "Навесное оборудование"
 ];
 
 export default function Equipment() {
@@ -177,15 +161,15 @@ export default function Equipment() {
           <div className="flex flex-wrap gap-4 justify-center">
             {categories.map((category) => (
               <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
+                key={category}
+                onClick={() => setActiveCategory(category)}
                 className={`px-6 py-2 rounded-full transition-colors ${
-                  activeCategory === category.id
+                  activeCategory === category
                     ? "bg-yellow-400 text-black"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                 }`}
               >
-                {category.name}
+                {category}
               </button>
             ))}
           </div>

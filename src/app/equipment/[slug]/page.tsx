@@ -1,64 +1,424 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 import OrderForm from "@/components/OrderForm";
 
-const equipmentDetails = {
-  "crane-liebherr-ltm-1090": {
+interface Equipment {
+  title: string;
+  description: string;
+  fullDescription: string;
+  price: string;
+  imageUrl: string;
+  slug: string;
+  category: string;
+  specifications: Array<{
+    name: string;
+    value: string;
+  }>;
+}
+
+const equipmentData: Equipment[] = [
+  {
     title: "Автокран Liebherr LTM 1090",
-    description: `Мощный автокран Liebherr LTM 1090 грузоподъемностью 90 тонн предназначен для выполнения сложных монтажных работ на строительных площадках.
-
-Технические характеристики:
-• Максимальная грузоподъемность: 90 тонн
-• Длина стрелы: 50 метров
-• Максимальный вылет стрелы: 48 метров
-• Высота подъема: до 76 метров с гуськом
-• Габариты: 12.9 × 2.75 × 3.9 метров
-• Колесная формула: 8×6×8
-
-Преимущества:
-• Современная система управления LICCON
-• Телескопическая стрела с овоидным профилем
-• Полный привод и подруливание всеми колесами
-• Экономичный двигатель Mercedes-Benz
-• Комфортабельная кабина крановщика`,
+    description: "Мощный автокран грузоподъемностью 90 тонн для выполнения сложных монтажных работ. Оснащен современной системой управления LICCON.",
+    fullDescription: `
+      Автокран Liebherr LTM 1090 - это современная машина, предназначенная для выполнения сложных монтажных работ.
+      
+      Технические характеристики:
+      • Грузоподъемность: 90 тонн
+      • Длина стрелы: 50 метров
+      • Максимальный вылет стрелы: 48 метров
+      • Высота подъема: до 76 метров
+      • Система управления: LICCON
+      
+      Преимущества:
+      • Высокая мобильность и маневренность
+      • Современная система безопасности
+      • Точное управление всеми операциями
+      • Экономичный расход топлива
+      • Комфортная кабина оператора
+      
+      Области применения:
+      • Монтаж промышленного оборудования
+      • Строительство высотных зданий
+      • Установка башенных кранов
+      • Погрузочно-разгрузочные работы
+    `,
     price: "от 18 000 ₽/смена",
     imageUrl: "/images/crane-liebherr.jpg",
-    features: [
-      "Грузоподъемность 90 тонн",
-      "Длина стрелы 50 м",
-      "Система LICCON",
-      "Полный привод",
-      "Экономичный расход топлива",
-      "Высокая маневренность"
-    ],
-    applications: [
-      "Монтаж металлоконструкций",
-      "Строительство зданий",
-      "Установка оборудования",
-      "Погрузочно-разгрузочные работы",
-      "Монтаж башенных кранов"
+    slug: "crane-liebherr-ltm-1090",
+    category: "Краны и автовышки",
+    specifications: [
+      { name: "Грузоподъемность", value: "90 тонн" },
+      { name: "Длина стрелы", value: "50 м" },
+      { name: "Высота подъема", value: "76 м" },
+      { name: "Колесная формула", value: "8x8" },
+      { name: "Мощность двигателя", value: "450 л.с." }
+    ]
+  },
+  {
+    title: "Автокран Ивановец КС-45717",
+    description: "Надежный автокран грузоподъемностью 25 тонн. Идеален для работы в городских условиях благодаря компактным размерам.",
+    fullDescription: `
+      Автокран Ивановец КС-45717 - надежная и маневренная машина для выполнения грузоподъемных работ в условиях плотной городской застройки.
+      
+      Технические характеристики:
+      • Грузоподъемность: 25 тонн
+      • Длина стрелы: 21.7 метров
+      • Максимальный вылет стрелы: 19.7 метров
+      • Высота подъема: до 21.9 метров
+      • Базовое шасси: КАМАЗ-65115
+      
+      Преимущества:
+      • Компактные габариты
+      • Высокая маневренность
+      • Простота управления
+      • Надежность конструкции
+      • Доступное техническое обслуживание
+      
+      Области применения:
+      • Строительно-монтажные работы
+      • Погрузка-разгрузка материалов
+      • Монтаж оборудования
+      • Работа в стесненных условиях
+    `,
+    price: "от 12 000 ₽/смена",
+    imageUrl: "/images/crane-ivanovec.jpg",
+    slug: "crane-ivanovec-ks45717",
+    category: "Краны и автовышки",
+    specifications: [
+      { name: "Грузоподъемность", value: "25 тонн" },
+      { name: "Длина стрелы", value: "21.7 м" },
+      { name: "Высота подъема", value: "21.9 м" },
+      { name: "Колесная формула", value: "6x4" },
+      { name: "Мощность двигателя", value: "300 л.с." }
+    ]
+  },
+  {
+    title: "Экскаватор Volvo EC220D",
+    description: "Гусеничный экскаватор с мощным двигателем и высокой производительностью. Отлично подходит для земляных работ любой сложности.",
+    fullDescription: `
+      Экскаватор Volvo EC220D - современная машина, сочетающая в себе высокую производительность, экономичность и комфорт оператора.
+      
+      Технические характеристики:
+      • Эксплуатационная масса: 22.1-23.2 тонн
+      • Объем ковша: 0.9-1.55 м³
+      • Глубина копания: до 6.7 метров
+      • Радиус копания: до 9.9 метров
+      • Двигатель: Volvo D6E
+      
+      Преимущества:
+      • Высокая производительность
+      • Экономичный расход топлива
+      • Усиленная ходовая часть
+      • Комфортная кабина
+      • Простое техобслуживание
+      
+      Области применения:
+      • Земляные работы
+      • Прокладка коммуникаций
+      • Дорожное строительство
+      • Карьерные работы
+    `,
+    price: "от 14 000 ₽/смена",
+    imageUrl: "/images/excavator-volvo.jpg",
+    slug: "excavator-volvo-ec220d",
+    category: "Экскаваторы",
+    specifications: [
+      { name: "Эксплуатационная масса", value: "22.1-23.2 т" },
+      { name: "Объем ковша", value: "0.9-1.55 м³" },
+      { name: "Глубина копания", value: "6.7 м" },
+      { name: "Мощность двигателя", value: "175 л.с." },
+      { name: "Ширина гусениц", value: "600 мм" }
+    ]
+  },
+  {
+    title: "Бульдозер Б10М",
+    description: "Мощный промышленный бульдозер для планировки площадок, перемещения грунта и строительных материалов.",
+    fullDescription: `
+      Бульдозер Б10М - надежная машина российского производства для выполнения широкого спектра землеройных работ.
+      
+      Технические характеристики:
+      • Эксплуатационная масса: 21 тонна
+      • Ширина отвала: 3.31 метра
+      • Высота отвала: 1.31 метра
+      • Объем призмы волочения: 4.75 м³
+      • Двигатель: ЯМЗ-236
+      
+      Преимущества:
+      • Высокая проходимость
+      • Простота конструкции
+      • Ремонтопригодность
+      • Мощный отвал
+      • Надежная трансмиссия
+      
+      Области применения:
+      • Планировка площадок
+      • Перемещение грунта
+      • Строительство дорог
+      • Разработка карьеров
+    `,
+    price: "от 12 000 ₽/смена",
+    imageUrl: "/images/bulldozer-b10m.jpg",
+    slug: "bulldozer-b10m",
+    category: "Бульдозеры",
+    specifications: [
+      { name: "Эксплуатационная масса", value: "21 т" },
+      { name: "Ширина отвала", value: "3.31 м" },
+      { name: "Мощность двигателя", value: "180 л.с." },
+      { name: "Объем отвала", value: "4.75 м³" },
+      { name: "Тип ходовой части", value: "Гусеничный" }
+    ]
+  },
+  {
+    title: "Самосвал МАЗ-5516",
+    description: "Надежный самосвал грузоподъемностью 20 тонн для перевозки сыпучих грузов и строительных материалов.",
+    fullDescription: `
+      Самосвал МАЗ-5516 - проверенный временем грузовой автомобиль для перевозки различных строительных материалов.
+      
+      Технические характеристики:
+      • Грузоподъемность: 20 тонн
+      • Объем кузова: 16 м³
+      • Колесная формула: 6x4
+      • Тип кузова: Самосвальный
+      • Двигатель: ЯМЗ-238
+      
+      Преимущества:
+      • Высокая надежность
+      • Простота обслуживания
+      • Усиленная рама
+      • Вместительный кузов
+      • Экономичность
+      
+      Области применения:
+      • Перевозка сыпучих материалов
+      • Вывоз строительного мусора
+      • Доставка щебня и песка
+      • Работа в карьерах
+    `,
+    price: "от 9 000 ₽/смена",
+    imageUrl: "/images/maz-5516.jpg",
+    slug: "dump-truck-maz5516",
+    category: "Самосвалы",
+    specifications: [
+      { name: "Грузоподъемность", value: "20 т" },
+      { name: "Объем кузова", value: "16 м³" },
+      { name: "Колесная формула", value: "6x4" },
+      { name: "Мощность двигателя", value: "330 л.с." },
+      { name: "Тип топлива", value: "Дизель" }
+    ]
+  },
+  {
+    title: "Автовышка ПСС-131.17Э",
+    description: "Автогидроподъемник с высотой подъема 17 метров для выполнения высотных монтажных и ремонтных работ.",
+    fullDescription: `
+      Автовышка ПСС-131.17Э - компактная и маневренная машина для проведения высотных работ в городских условиях.
+      
+      Технические характеристики:
+      • Высота подъема: 17 метров
+      • Грузоподъемность люльки: 250 кг
+      • Вылет стрелы: 8.5 метров
+      • Угол поворота: 360°
+      • Базовое шасси: ГАЗ-3309
+      
+      Преимущества:
+      • Компактные размеры
+      • Легкость управления
+      • Надежная гидравлика
+      • Устойчивость
+      • Безопасность работы
+      
+      Области применения:
+      • Монтаж рекламных конструкций
+      • Обслуживание электросетей
+      • Фасадные работы
+      • Обрезка деревьев
+    `,
+    price: "от 8 000 ₽/смена",
+    imageUrl: "/images/aerial-platform-pss.jpg",
+    slug: "aerial-platform-pss131",
+    category: "Краны и автовышки",
+    specifications: [
+      { name: "Высота подъема", value: "17 м" },
+      { name: "Грузоподъемность люльки", value: "250 кг" },
+      { name: "Вылет стрелы", value: "8.5 м" },
+      { name: "Угол поворота", value: "360°" },
+      { name: "Размер люльки", value: "0.8x1.4 м" }
+    ]
+  },
+  {
+    title: "Фронтальный погрузчик SDLG LG936L",
+    description: "Универсальный погрузчик с объемом ковша 1.8 м³ для погрузочно-разгрузочных работ и перемещения сыпучих материалов.",
+    fullDescription: `
+      Фронтальный погрузчик SDLG LG936L - надежная и производительная машина для выполнения различных погрузочных работ.
+      
+      Технические характеристики:
+      • Грузоподъемность: 3 тонны
+      • Объем ковша: 1.8 м³
+      • Высота разгрузки: 2.96 метра
+      • Время подъема: 5.5 секунд
+      • Радиус поворота: 5.3 метра
+      
+      Преимущества:
+      • Высокая маневренность
+      • Просторная кабина
+      • Надежная трансмиссия
+      • Легкость управления
+      • Доступное обслуживание
+      
+      Области применения:
+      • Погрузка сыпучих материалов
+      • Работа на складах
+      • Уборка территории
+      • Строительные работы
+    `,
+    price: "от 10 000 ₽/смена",
+    imageUrl: "/images/loader-sdlg.jpg",
+    slug: "loader-sdlg-lg936l",
+    category: "Погрузчики",
+    specifications: [
+      { name: "Грузоподъемность", value: "3 т" },
+      { name: "Объем ковша", value: "1.8 м³" },
+      { name: "Высота разгрузки", value: "2.96 м" },
+      { name: "Мощность двигателя", value: "125 л.с." },
+      { name: "Эксплуатационная масса", value: "10.7 т" }
+    ]
+  },
+  {
+    title: "Каток дорожный BOMAG BW 213",
+    description: "Грунтовый виброкаток для уплотнения различных типов грунта и асфальтобетонных смесей.",
+    fullDescription: `
+      Каток BOMAG BW 213 - современная уплотнительная техника для дорожного строительства и земляных работ.
+      
+      Технические характеристики:
+      • Эксплуатационная масса: 12.5 тонн
+      • Ширина уплотнения: 2.13 метра
+      • Частота вибрации: 30/40 Гц
+      • Амплитуда: 1.9/0.9 мм
+      • Линейная нагрузка: 35.5 кг/см
+      
+      Преимущества:
+      • Высокая эффективность уплотнения
+      • Система контроля качества
+      • Комфортная кабина
+      • Экономичный двигатель
+      • Простота обслуживания
+      
+      Области применения:
+      • Строительство дорог
+      • Уплотнение грунта
+      • Ландшафтные работы
+      • Строительство площадок
+    `,
+    price: "от 11 000 ₽/смена",
+    imageUrl: "/images/roller-bomag.jpg",
+    slug: "roller-bomag-bw213",
+    category: "Катки",
+    specifications: [
+      { name: "Эксплуатационная масса", value: "12.5 т" },
+      { name: "Ширина уплотнения", value: "2.13 м" },
+      { name: "Частота вибрации", value: "30/40 Гц" },
+      { name: "Мощность двигателя", value: "155 л.с." },
+      { name: "Скорость движения", value: "0-12 км/ч" }
+    ]
+  },
+  {
+    title: "Автогрейдер ГС-14.02",
+    description: "Современный автогрейдер для профилирования дорог, планировки площадок и перемещения грунта.",
+    fullDescription: `
+      Автогрейдер ГС-14.02 - надежная машина для выполнения планировочных и профилировочных работ.
+      
+      Технические характеристики:
+      • Эксплуатационная масса: 14.7 тонн
+      • Ширина отвала: 3.74 метра
+      • Высота отвала: 0.62 метра
+      • Угол поворота отвала: 360°
+      • Скорость движения: до 39 км/ч
+      
+      Преимущества:
+      • Точность управления отвалом
+      • Высокая маневренность
+      • Надежная гидравлика
+      • Комфортная кабина
+      • Простота обслуживания
+      
+      Области применения:
+      • Строительство дорог
+      • Планировка площадок
+      • Содержание дорог
+      • Снегоуборочные работы
+    `,
+    price: "от 13 000 ₽/смена",
+    imageUrl: "/images/grader-gs14.jpg",
+    slug: "grader-gs14",
+    category: "Грейдеры",
+    specifications: [
+      { name: "Эксплуатационная масса", value: "14.7 т" },
+      { name: "Ширина отвала", value: "3.74 м" },
+      { name: "Мощность двигателя", value: "160 л.с." },
+      { name: "Колесная формула", value: "1x2x3" },
+      { name: "Максимальная скорость", value: "39 км/ч" }
+    ]
+  },
+  {
+    title: "Гидробур Delta RD-15",
+    description: "Мощный гидравлический бур для бурения скважин различного диаметра в грунтах разной плотности.",
+    fullDescription: `
+      Гидробур Delta RD-15 - эффективное навесное оборудование для проведения буровых работ.
+      
+      Технические характеристики:
+      • Крутящий момент: 1500 Нм
+      • Диаметр бурения: до 500 мм
+      • Глубина бурения: до 3 метров
+      • Давление масла: 210 бар
+      • Расход масла: 45-75 л/мин
+      
+      Преимущества:
+      • Высокая производительность
+      • Надежная конструкция
+      • Различные типы шнеков
+      • Простота монтажа
+      • Минимальное обслуживание
+      
+      Области применения:
+      • Бурение под столбы
+      • Установка ограждений
+      • Посадка деревьев
+      • Геологические изыскания
+    `,
+    price: "от 7 000 ₽/смена",
+    imageUrl: "/images/auger-delta.jpg",
+    slug: "auger-delta-rd15",
+    category: "Навесное оборудование",
+    specifications: [
+      { name: "Крутящий момент", value: "1500 Нм" },
+      { name: "Диаметр бурения", value: "до 500 мм" },
+      { name: "Глубина бурения", value: "до 3 м" },
+      { name: "Давление масла", value: "210 бар" },
+      { name: "Расход масла", value: "45-75 л/мин" }
     ]
   }
-};
+];
 
-export default function EquipmentDetail() {
-  const { slug } = useParams();
-  const equipment = equipmentDetails[slug as keyof typeof equipmentDetails];
+export default function EquipmentPage() {
+  const params = useParams();
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
-
+  
+  const equipment = equipmentData.find(item => item.slug === params.slug);
+  
   if (!equipment) {
     return (
-      <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Техника не найдена</h1>
-          <Link href="/equipment" className="text-yellow-400 hover:text-yellow-300">
-            Вернуться в каталог
-          </Link>
+      <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24 pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl font-bold text-center mb-8">Техника не найдена</h1>
+          <p className="text-center mb-8">
+            <Link href="/equipment" className="text-yellow-400 hover:text-yellow-300">
+              Вернуться к каталогу
+            </Link>
+          </p>
         </div>
       </main>
     );
@@ -67,31 +427,23 @@ export default function EquipmentDetail() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="mb-8">
-          <Link 
-            href="/equipment"
-            className="text-gray-400 hover:text-white transition-colors inline-flex items-center"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Назад в каталог
+        <div className="mb-8">
+          <Link href="/equipment" className="text-yellow-400 hover:text-yellow-300">
+            ← Вернуться к каталогу
           </Link>
-        </nav>
+        </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="relative aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
-              <Image
+            <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
+              <img
                 src={equipment.imageUrl}
                 alt={equipment.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="w-full h-full object-cover"
               />
             </div>
           </motion.div>
@@ -99,61 +451,60 @@ export default function EquipmentDetail() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
           >
             <h1 className="text-4xl font-bold mb-4">{equipment.title}</h1>
-            <p className="text-2xl text-yellow-400 font-semibold mb-6">{equipment.price}</p>
+            <p className="text-2xl font-semibold text-yellow-400 mb-6">
+              {equipment.price}
+            </p>
+            <p className="text-gray-300 mb-8">{equipment.description}</p>
             
-            <div className="prose prose-invert max-w-none mb-8">
-              <p className="whitespace-pre-line">{equipment.description}</p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-8 mb-8">
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-yellow-400">Особенности:</h3>
-                <ul className="space-y-2">
-                  {equipment.features.map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-300">
-                      <svg className="w-5 h-5 mr-2 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-yellow-400">Применение:</h3>
-                <ul className="space-y-2">
-                  {equipment.applications.map((app, index) => (
-                    <li key={index} className="flex items-center text-gray-300">
-                      <svg className="w-5 h-5 mr-2 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {app}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => setIsOrderFormOpen(true)}
-              className="w-full sm:w-auto bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-8 rounded-full text-lg"
+              className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-orange-600 transition-colors"
             >
-              Заказать технику
-            </motion.button>
+              Заказать
+            </button>
           </motion.div>
         </div>
-      </div>
 
-      <OrderForm
-        isOpen={isOrderFormOpen}
-        onClose={() => setIsOrderFormOpen(false)}
-        equipmentTitle={equipment.title}
-      />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Технические характеристики</h2>
+            <div className="bg-gray-800 rounded-lg p-6">
+              {equipment.specifications?.map((spec, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between py-3 border-b border-gray-700 last:border-0"
+                >
+                  <span className="text-gray-300">{spec.name}</span>
+                  <span className="font-semibold">{spec.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Подробное описание</h2>
+            <div className="bg-gray-800 rounded-lg p-6">
+              <div className="prose prose-invert">
+                {equipment.fullDescription?.split('\n').map((paragraph, index) => (
+                  <p key={index} className="mb-4 last:mb-0">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <OrderForm
+          isOpen={isOrderFormOpen}
+          onClose={() => setIsOrderFormOpen(false)}
+          equipmentTitle={equipment.title}
+          isSimpleForm={false}
+        />
+      </div>
     </main>
   );
 } 
