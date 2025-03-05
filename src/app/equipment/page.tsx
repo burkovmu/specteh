@@ -102,7 +102,7 @@ const categories = [
 
 export default function Equipment() {
   const searchParams = useSearchParams();
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("Все");
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function Equipment() {
   }, [searchParams]);
 
   const filteredEquipment = equipmentData.filter(item => {
-    const matchesCategory = activeCategory === "all" || item.category === activeCategory;
+    const matchesCategory = activeCategory === "Все" || item.category === activeCategory;
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
