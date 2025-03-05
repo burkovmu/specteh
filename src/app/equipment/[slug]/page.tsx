@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import OrderForm from "@/components/OrderForm";
+import Image from "next/image";
 
 interface Equipment {
   title: string;
@@ -439,11 +440,13 @@ export default function EquipmentPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
-              <img
+            <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden relative">
+              <Image
                 src={equipment.imageUrl}
                 alt={equipment.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </motion.div>
