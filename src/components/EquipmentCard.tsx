@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 
 interface EquipmentCardProps {
@@ -21,12 +20,10 @@ export default function EquipmentCard({ title, description, price, imageUrl, slu
       className="bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       <div className="relative aspect-w-16 aspect-h-9">
-        <Image
+        <img
           src={imageUrl}
           alt={title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover w-full h-full"
         />
       </div>
       <div className="p-6">
