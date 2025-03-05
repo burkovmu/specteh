@@ -5,6 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
 import OrderForm from "@/components/OrderForm";
+import Image from "next/image";
 
 export default function Home() {
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
@@ -70,14 +71,26 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
               >
-                <div className="aspect-w-16 aspect-h-9 bg-gray-700"></div>
+                <div className="relative aspect-w-16 aspect-h-9">
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-400">{item.description}</p>
-                  <Link href={`/equipment/${item.id}`}>
-                    <span className="mt-4 inline-block text-yellow-400 hover:text-yellow-300">
-                      Подробнее →
-                    </span>
+                  <p className="text-gray-400 mb-4">{item.description}</p>
+                  <Link 
+                    href={`/equipment?category=${encodeURIComponent(item.category)}`}
+                    className="inline-flex items-center text-yellow-400 hover:text-yellow-300"
+                  >
+                    Подробнее
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </Link>
                 </div>
               </motion.div>
@@ -155,20 +168,61 @@ export default function Home() {
 
 const equipmentItems = [
   {
-    id: "excavator",
+    id: "cranes",
+    title: "Краны и автовышки",
+    description: "Автокраны и автовышки различной грузоподъемности для монтажных и высотных работ",
+    imageUrl: "/images/crane-liebherr.jpg",
+    category: "Краны и автовышки"
+  },
+  {
+    id: "excavators",
     title: "Экскаваторы",
-    description: "Мощные экскаваторы различной грузоподъемности для земляных работ",
+    description: "Гусеничные и колесные экскаваторы для земляных и строительных работ",
+    imageUrl: "/images/excavator-volvo.jpg",
+    category: "Экскаваторы"
   },
   {
-    id: "crane",
-    title: "Автокраны",
-    description: "Современные автокраны для подъема и перемещения грузов",
+    id: "dump-trucks",
+    title: "Самосвалы",
+    description: "Самосвалы различной грузоподъемности для перевозки сыпучих материалов",
+    imageUrl: "/images/maz-5516.jpg",
+    category: "Самосвалы"
   },
   {
-    id: "bulldozer",
+    id: "bulldozers",
     title: "Бульдозеры",
-    description: "Надежные бульдозеры для планировки и перемещения грунта",
+    description: "Мощные бульдозеры для планировки площадок и перемещения грунта",
+    imageUrl: "/images/bulldozer-b10m.jpg",
+    category: "Бульдозеры"
   },
+  {
+    id: "loaders",
+    title: "Погрузчики",
+    description: "Фронтальные погрузчики для выполнения погрузочно-разгрузочных работ",
+    imageUrl: "/images/loader-sdlg.jpg",
+    category: "Погрузчики"
+  },
+  {
+    id: "rollers",
+    title: "Катки",
+    description: "Дорожные катки для уплотнения грунта и асфальтобетонных смесей",
+    imageUrl: "/images/roller-bomag.jpg",
+    category: "Катки"
+  },
+  {
+    id: "graders",
+    title: "Грейдеры",
+    description: "Автогрейдеры для профилирования дорог и планировки площадок",
+    imageUrl: "/images/grader-gs14.jpg",
+    category: "Грейдеры"
+  },
+  {
+    id: "attachments",
+    title: "Навесное оборудование",
+    description: "Различное навесное оборудование для спецтехники",
+    imageUrl: "/images/auger-delta.jpg",
+    category: "Навесное оборудование"
+  }
 ];
 
 const advantages = [

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import EquipmentCard from "@/components/EquipmentCard";
 
 const equipmentData = [
@@ -100,8 +101,16 @@ const categories = [
 ];
 
 export default function Equipment() {
+  const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const category = searchParams.get("category");
+    if (category) {
+      setActiveCategory(category);
+    }
+  }, [searchParams]);
 
   const filteredEquipment = equipmentData.filter(item => {
     const matchesCategory = activeCategory === "all" || item.category === activeCategory;
