@@ -20,6 +20,18 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
+  // Блокируем прокрутку при открытом меню
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   // Обработка скролла для изменения фона навбара
   useEffect(() => {
     const handleScroll = () => {
@@ -126,64 +138,64 @@ export default function Navbar() {
             </div>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile menu */}
-        <AnimatePresence mode="wait">
-          {isOpen && (
-            <div className="fixed inset-0 z-[150] md:hidden">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm"
-                onClick={() => setIsOpen(false)}
-                aria-hidden="true"
-              />
-              
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black border-l border-white/10 p-6 overflow-y-auto shadow-2xl"
-              >
-                <div className="flex flex-col h-full">
-                  <div className="flex-1 py-8">
-                    <div className="flex flex-col space-y-1">
-                      {links.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          className={`px-4 py-3 text-lg font-medium rounded-xl transition-colors ${
-                            pathname === link.href
-                              ? "bg-yellow-400/10 text-yellow-400"
-                              : "text-gray-300 hover:bg-white/5 hover:text-white"
-                          }`}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="pt-6 pb-8">
-                    <button
-                      onClick={() => {
-                        setIsOpen(false);
-                        setIsOrderFormOpen(true);
-                      }}
-                      className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-3 rounded-xl text-lg font-medium shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_50px_rgba(251,191,36,0.5)] transition-all duration-300"
-                    >
-                      Связаться с нами
-                    </button>
+      {/* Mobile menu portal */}
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <div className="fixed inset-0 z-[150] md:hidden">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+              aria-hidden="true"
+            />
+            
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+              className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black border-l border-white/10 p-6 overflow-y-auto shadow-2xl"
+            >
+              <div className="flex flex-col h-full">
+                <div className="flex-1 py-8">
+                  <div className="flex flex-col space-y-1">
+                    {links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`px-4 py-3 text-lg font-medium rounded-xl transition-colors ${
+                          pathname === link.href
+                            ? "bg-yellow-400/10 text-yellow-400"
+                            : "text-gray-300 hover:bg-white/5 hover:text-white"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
                   </div>
                 </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
-      </nav>
+                
+                <div className="pt-6 pb-8">
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsOrderFormOpen(true);
+                    }}
+                    className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-3 rounded-xl text-lg font-medium shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_50px_rgba(251,191,36,0.5)] transition-all duration-300"
+                  >
+                    Связаться с нами
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <OrderForm
         isOpen={isOrderFormOpen}
