@@ -43,11 +43,10 @@ export default function Home() {
               className="mb-8"
             >
               <h1 className="text-6xl md:text-8xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 tracking-tight leading-tight">
-                Аренда спецтехники<br />
-                <span className="text-4xl md:text-6xl">в Екатеринбурге</span>
+                Аренда спецтехники
               </h1>
               <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-                Профессиональная строительная техника для любых задач с оперативной доставкой по всей области
+                Профессиональная строительная техника для решения любых задач вашего бизнеса
               </p>
             </motion.div>
 
