@@ -36,7 +36,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${
+      <nav className={`fixed w-full z-[60] transition-all duration-300 ${
         isScrolled ? "bg-black/90 backdrop-blur-md" : "bg-transparent"
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -130,15 +130,13 @@ export default function Navbar() {
         {/* Mobile menu */}
         <AnimatePresence mode="wait">
           {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed inset-0 z-[90] md:hidden"
-            >
-              <div 
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm" 
+            <div className="fixed inset-0 z-[150] md:hidden">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm"
                 onClick={() => setIsOpen(false)}
                 aria-hidden="true"
               />
@@ -148,7 +146,7 @@ export default function Navbar() {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black border-l border-white/10 p-6 overflow-y-auto"
+                className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black border-l border-white/10 p-6 overflow-y-auto shadow-2xl"
               >
                 <div className="flex flex-col h-full">
                   <div className="flex-1 py-8">
@@ -182,7 +180,7 @@ export default function Navbar() {
                   </div>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </nav>
