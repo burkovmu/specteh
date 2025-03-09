@@ -162,6 +162,27 @@ export default function Navbar() {
               className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black border-l border-white/10 p-6 overflow-y-auto shadow-2xl"
             >
               <div className="flex flex-col h-full">
+                {/* Кнопка закрытия */}
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center group"
+                  aria-label="Закрыть меню"
+                >
+                  <svg 
+                    className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M6 18L18 6M6 6l12 12" 
+                    />
+                  </svg>
+                </button>
+
                 <div className="flex-1 py-8">
                   <div className="flex flex-col space-y-1">
                     {links.map((link) => (
