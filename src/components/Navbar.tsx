@@ -99,26 +99,26 @@ export default function Navbar() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative w-10 h-10 text-gray-300 hover:text-white focus:outline-none z-50"
+                className="relative w-12 h-12 text-gray-300 hover:text-white focus:outline-none z-[100] p-2 -mr-2"
               >
                 <span className="sr-only">Открыть меню</span>
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5">
                   <span
                     aria-hidden="true"
-                    className={`block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
-                      isOpen ? "rotate-45" : "-translate-y-1.5"
+                    className={`block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out ${
+                      isOpen ? "rotate-45 translate-y-0" : "-translate-y-1.5"
                     }`}
                   />
                   <span
                     aria-hidden="true"
-                    className={`block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
+                    className={`block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out ${
                       isOpen ? "opacity-0" : "opacity-100"
                     }`}
                   />
                   <span
                     aria-hidden="true"
-                    className={`block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
-                      isOpen ? "-rotate-45" : "translate-y-1.5"
+                    className={`block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out ${
+                      isOpen ? "-rotate-45 translate-y-0" : "translate-y-1.5"
                     }`}
                   />
                 </div>
@@ -128,16 +128,20 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed inset-0 z-40 md:hidden"
+              className="fixed inset-0 z-[90] md:hidden"
             >
-              <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
+              <div 
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm" 
+                onClick={() => setIsOpen(false)}
+                aria-hidden="true"
+              />
               
               <motion.div
                 initial={{ x: "100%" }}
