@@ -58,25 +58,20 @@ export default function Navbar() {
                 href="/" 
                 className="group flex items-center space-x-4"
               >
-                <div className="relative w-12 h-12">
+                <div className="relative w-10 h-10">
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-600 rounded-xl transform group-hover:scale-105 transition-all duration-500">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,0,0,0.4),transparent)]"></div>
                   </div>
                   <div className="absolute inset-[1.5px] bg-black rounded-xl flex items-center justify-center overflow-hidden">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-2xl">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-xl">
                       УС
                     </span>
                   </div>
                 </div>
-                <div className="flex flex-col justify-center w-[160px]">
-                  <h1 className="text-xl font-bold leading-none mb-1 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 whitespace-nowrap w-full">
+                <div className="flex flex-col justify-center">
+                  <h1 className="text-lg font-bold leading-none text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 whitespace-nowrap">
                     УралСтройТех
                   </h1>
-                  <div className="w-full">
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-medium leading-none whitespace-nowrap w-full">
-                      Аренда спецтехники
-                    </p>
-                  </div>
                 </div>
               </Link>
             </div>
