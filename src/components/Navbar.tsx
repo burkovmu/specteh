@@ -56,34 +56,25 @@ export default function Navbar() {
             <div className="flex items-center">
               <Link 
                 href="/" 
-                className="group flex items-center space-x-3"
+                className="group flex items-center space-x-4"
               >
                 <div className="relative w-12 h-12">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-orange-600 rounded-xl transform group-hover:scale-105 transition-all duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-600 rounded-xl transform group-hover:scale-105 transition-all duration-500">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,0,0,0.4),transparent)]"></div>
                   </div>
                   <div className="absolute inset-[1.5px] bg-black rounded-xl flex items-center justify-center overflow-hidden">
-                    <div className="relative flex items-center justify-center w-full h-full">
-                      <span className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-lg tracking-wider">
-                        U
-                      </span>
-                      <span className="absolute text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-lg tracking-wider" style={{ transform: 'translate(2px, 2px)' }}>
-                        S
-                      </span>
-                    </div>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-2xl">
+                      УС
+                    </span>
                   </div>
                 </div>
-                <div className="flex flex-col">
-                  <div className="flex items-center">
-                    <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500">
-                      УралСтройТех
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium">
-                      Аренда спецтехники
-                    </span>
-                  </div>
+                <div className="flex flex-col justify-center">
+                  <h1 className="text-xl font-bold leading-none mb-0.5 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500">
+                    УралСтройТех
+                  </h1>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium leading-none">
+                    Аренда спецтехники
+                  </p>
                 </div>
               </Link>
             </div>
