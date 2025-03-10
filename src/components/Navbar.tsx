@@ -68,13 +68,15 @@ export default function Navbar() {
                     </span>
                   </div>
                 </div>
-                <div className="flex flex-col justify-center w-[140px]">
-                  <h1 className="text-xl font-bold leading-none mb-0.5 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 whitespace-nowrap">
+                <div className="flex flex-col justify-center w-[160px]">
+                  <h1 className="text-xl font-bold leading-none mb-1 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 whitespace-nowrap w-full">
                     УралСтройТех
                   </h1>
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium leading-none whitespace-nowrap">
-                    Аренда спецтехники
-                  </p>
+                  <div className="w-full">
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-medium leading-none whitespace-nowrap w-full">
+                      Аренда спецтехники
+                    </p>
+                  </div>
                 </div>
               </Link>
             </div>
