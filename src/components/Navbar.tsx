@@ -59,9 +59,9 @@ export default function Navbar() {
                 className="group flex items-center space-x-3"
               >
                 <div className="relative w-11 h-11">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-orange-600 rounded-xl transform rotate-45 group-hover:rotate-[135deg] transition-all duration-500 shadow-[0_0_20px_rgba(251,191,36,0.3)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"></div>
-                  <div className="absolute inset-[2px] bg-black rounded-xl flex items-center justify-center overflow-hidden">
-                    <span className="transform -rotate-45 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500 font-bold text-lg tracking-tighter leading-none group-hover:rotate-[-135deg] transition-all duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-orange-600 rounded-2xl transform transition-all duration-500 shadow-[0_0_20px_rgba(251,191,36,0.3)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"></div>
+                  <div className="absolute inset-[2px] bg-black rounded-2xl flex items-center justify-center overflow-hidden">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500 font-bold text-xl tracking-tight leading-none transition-all duration-500">
                       УСТ
                     </span>
                   </div>
@@ -71,7 +71,6 @@ export default function Navbar() {
                     <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500">
                       УралСтройТех
                     </span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 opacity-75"></div>
                   </div>
                   <div className="flex items-center">
                     <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium">
@@ -221,7 +220,7 @@ export default function Navbar() {
       <OrderForm
         isOpen={isOrderFormOpen}
         onClose={() => setIsOrderFormOpen(false)}
-        isSimpleForm={false}
+        isSimpleForm={true}
       />
     </>
   );
