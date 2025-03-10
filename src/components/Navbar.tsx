@@ -58,16 +58,23 @@ export default function Navbar() {
                 href="/" 
                 className="group flex items-center space-x-3"
               >
-                <div className="relative w-11 h-11">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-orange-600 rounded-2xl transform transition-all duration-500 shadow-[0_0_20px_rgba(251,191,36,0.3)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"></div>
-                  <div className="absolute inset-[2px] bg-black rounded-2xl flex items-center justify-center overflow-hidden">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500 font-bold text-xl tracking-tight leading-none transition-all duration-500">
-                      УСТ
-                    </span>
+                <div className="relative w-12 h-12">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-orange-600 rounded-xl transform group-hover:scale-105 transition-all duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                  </div>
+                  <div className="absolute inset-[1.5px] bg-black rounded-xl flex items-center justify-center overflow-hidden">
+                    <div className="relative flex items-center justify-center w-full h-full">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-lg tracking-wider">
+                        U
+                      </span>
+                      <span className="absolute text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-lg tracking-wider" style={{ transform: 'translate(2px, 2px)' }}>
+                        S
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center">
                     <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500">
                       УралСтройТех
                     </span>
