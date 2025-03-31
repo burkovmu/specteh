@@ -82,7 +82,7 @@ export default function Home() {
             <div className="mb-8">
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28 flex flex-col items-center">
                 <div>
-                  <h1 className="text-6xl md:text-8xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 tracking-tight leading-tight font-black-ops uppercase">
+                  <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 tracking-tight leading-tight font-black-ops uppercase break-words">
                     Аренда спецтехники
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light leading-relaxed">

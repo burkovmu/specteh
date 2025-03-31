@@ -77,6 +77,18 @@ body {
   }
 }
 
+/* Адаптивные улучшения для мобильных устройств */
+@media (max-width: 640px) {
+  h1, h2, h3 {
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  .font-black-ops {
+    letter-spacing: -0.02em;
+  }
+}
+
 /* Закругленные элементы */
 .rounded-custom {
   border-radius: 0.75rem;
