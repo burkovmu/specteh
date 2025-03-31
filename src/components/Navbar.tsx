@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderForm from "./OrderForm";
@@ -18,60 +18,103 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const navbarRef = useRef<HTMLElement>(null);
+
+  // Индикатор рендеринга на стороне клиента и начальная настройка
+  useEffect(() => {
+    // Устанавливаем начальное значение скролла сразу
+    setIsScrolled(window.scrollY > 20);
+    
+    // Устанавливаем флаг монтирования
+    setMounted(true);
+    
+    // Принудительный ререндер для исправления проблем с анимацией
+    if (navbarRef.current) {
+      navbarRef.current.style.opacity = '1';
+    }
+  }, []);
 
   // Блокируем прокрутку при открытом меню
   useEffect(() => {
+    if (!mounted) return;
+    
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     }
+    
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [isOpen, mounted]);
 
   // Обработка скролла для изменения фона навбара
   useEffect(() => {
+    if (!mounted) return;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      // Используем requestAnimationFrame для оптимизации производительности
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 20);
+      });
     };
-    window.addEventListener("scroll", handleScroll);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [mounted]);
 
   // Закрываем мобильное меню при изменении маршрута
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
+  // Если компонент не смонтирован (серверный рендеринг), показываем статичную версию
+  if (!mounted) {
+    return (
+      <nav className="fixed w-full z-[60] bg-black/90 backdrop-blur-md border-b border-gray-800/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <div className="relative">
+                <h1 className="text-2xl font-extrabold tracking-tight">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 drop-shadow-sm font-black-ops uppercase">
+                    УралСтройТех
+                  </span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
   return (
     <>
-      <nav className={`fixed w-full z-[60] transition-all duration-300 ${
-        isScrolled ? "bg-black/90 backdrop-blur-md" : "bg-transparent"
-      }`}>
+      <nav 
+        ref={navbarRef}
+        className={`fixed w-full z-[60] transition-colors duration-300 ${
+          isScrolled ? "bg-black/90 backdrop-blur-md shadow-md border-b border-gray-800/20" : "bg-gradient-to-b from-black/80 to-transparent"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <Link 
                 href="/" 
-                className="group flex items-center space-x-4"
+                className="group"
+                prefetch={true}
               >
-                <div className="relative w-10 h-10">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-600 rounded-xl transform group-hover:scale-105 transition-all duration-500">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,0,0,0.4),transparent)]"></div>
-                  </div>
-                  <div className="absolute inset-[1.5px] bg-black rounded-xl flex items-center justify-center overflow-hidden">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-300 to-orange-500 font-bold text-xl">
-                      УС
+                <div className="relative group-hover:opacity-80 transition-colors duration-300">
+                  <h1 className="text-2xl font-extrabold tracking-tight">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 drop-shadow-sm font-black-ops uppercase">
+                      УралСтройТех
                     </span>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center">
-                  <h1 className="text-lg font-bold leading-none text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 whitespace-nowrap">
-                    УралСтройТех
                   </h1>
+                  <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-yellow-300 to-orange-500 opacity-0 group-hover:opacity-100 transform origin-left scale-x-0 group-hover:scale-x-100 transition-all duration-300"></div>
                 </div>
               </Link>
             </div>
@@ -83,6 +126,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    prefetch={true}
                     className={`text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       pathname === link.href ? "text-yellow-400" : ""
                     }`}
@@ -90,14 +134,12 @@ export default function Navbar() {
                     {link.label}
                   </Link>
                 ))}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <button
                   onClick={() => setIsOrderFormOpen(true)}
-                  className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full text-sm font-medium shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] transition-all duration-300"
+                  className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full text-sm font-medium shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] transition-all duration-300 transform hover:scale-105 active:scale-95"
                 >
                   Связаться с нами
-                </motion.button>
+                </button>
               </div>
             </div>
 
@@ -106,6 +148,7 @@ export default function Navbar() {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative w-12 h-12 text-gray-300 hover:text-white focus:outline-none z-[100] p-2 -mr-2"
+                aria-expanded={isOpen}
               >
                 <span className="sr-only">Открыть меню</span>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5">
@@ -135,15 +178,15 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile menu portal */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {isOpen && (
           <div className="fixed inset-0 z-[150] md:hidden">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm"
               onClick={() => setIsOpen(false)}
               aria-hidden="true"
             />
@@ -152,7 +195,7 @@ export default function Navbar() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+              transition={{ type: "tween", duration: 0.25 }}
               className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black border-l border-white/10 p-6 overflow-y-auto shadow-2xl"
             >
               <div className="flex flex-col h-full">
@@ -183,6 +226,7 @@ export default function Navbar() {
                       <Link
                         key={link.href}
                         href={link.href}
+                        prefetch={true}
                         className={`px-4 py-3 text-lg font-medium rounded-xl transition-colors ${
                           pathname === link.href
                             ? "bg-yellow-400/10 text-yellow-400"
