@@ -79,28 +79,28 @@ export default function Home() {
         {/* Контент */}
         <div className="relative z-10 px-4 max-w-7xl mx-auto w-full">
           <div className={`text-center ${isLoaded ? 'content-fade-in' : 'opacity-0'}`}>
-            <div className="mb-8">
-              <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28 flex flex-col items-center">
+            <div className="mb-6 sm:mb-8">
+              <div className="relative max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-16 sm:pb-28 flex flex-col items-center">
                 <div>
-                  <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 tracking-tight leading-tight font-black-ops uppercase break-words">
+                  <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 tracking-tight leading-tight font-black-ops uppercase break-words">
                     Аренда спецтехники
                   </h1>
-                  <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                  <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto font-light leading-relaxed">
                     Профессиональная строительная техника для решения любых задач вашего бизнеса
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                 <Link
                   href="/equipment"
-                  className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-4 px-10 rounded-full text-lg inline-block shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_50px_rgba(251,191,36,0.5)] transition-all duration-300"
+                  className="w-full sm:w-auto bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-full text-base sm:text-lg inline-block shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_50px_rgba(251,191,36,0.5)] transition-all duration-300"
                 >
                   Заказать технику
                 </Link>
                 <Link
                   href="/contacts"
-                  className="bg-white/10 backdrop-blur-sm text-white font-bold py-4 px-10 rounded-full text-lg inline-block hover:bg-white/20 transition-all duration-300 border border-white/20"
+                  className="w-full sm:w-auto bg-white/10 backdrop-blur-sm text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-full text-base sm:text-lg inline-block hover:bg-white/20 transition-all duration-300 border border-white/20"
                 >
                   Связаться с нами
                 </Link>
@@ -111,14 +111,14 @@ export default function Home() {
 
         {/* Скролл индикатор */}
         <div
-          className={`absolute bottom-10 z-10 animate-bounce ${isLoaded ? 'opacity-50' : 'opacity-0'} transition-opacity duration-500`}
+          className={`absolute bottom-6 sm:bottom-10 z-10 animate-bounce ${isLoaded ? 'opacity-50' : 'opacity-0'} transition-opacity duration-500`}
         >
-          <ChevronDownIcon className="h-8 w-8 text-white" />
+          <ChevronDownIcon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
         </div>
       </section>
 
       {/* Equipment Section */}
-      <section className="py-32 px-4 bg-gradient-to-b from-black via-gray-900 to-black relative">
+      <section className="py-16 sm:py-24 md:py-32 px-4 bg-gradient-to-b from-black via-gray-900 to-black relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 via-transparent to-transparent opacity-50"></div>
         
         {/* Декоративный элемент */}
@@ -127,7 +127,7 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="absolute top-24 left-1/2 -translate-x-1/2 w-24 h-1.5 bg-gradient-to-r from-yellow-300 to-orange-500 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.5)]"
+          className="absolute top-16 sm:top-24 left-1/2 -translate-x-1/2 w-16 sm:w-24 h-1 sm:h-1.5 bg-gradient-to-r from-yellow-300 to-orange-500 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.5)]"
         ></motion.div>
         
         <div className="max-w-7xl mx-auto relative">
@@ -136,7 +136,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-5xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500 pt-10"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-2 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500 pt-6 sm:pt-10"
           >
             Наша техника
           </motion.h2>
@@ -146,7 +146,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-center mb-20 text-gray-400 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl text-center mb-10 sm:mb-16 md:mb-20 text-gray-400 max-w-3xl mx-auto px-2"
           >
             Современный парк строительной техники УРАЛСТРОЙТЕХ для выполнения любых строительных и монтажных работ
           </motion.p>
@@ -192,19 +192,19 @@ export default function Home() {
       </section>
 
       {/* Преимущества */}
-      <section className="py-32 px-4 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+      <section className="py-16 sm:py-24 md:py-32 px-4 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-orange-500/10 via-transparent to-transparent opacity-30"></div>
         <div className="max-w-7xl mx-auto relative">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-5xl font-bold text-center mb-20 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 sm:mb-16 md:mb-20 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500"
           >
             Почему выбирают нас
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
             {advantages.map((advantage, index) => (
               <motion.div
                 key={index}
@@ -226,26 +226,26 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-4 relative">
+      <section className="py-16 sm:py-24 md:py-32 px-4 relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-yellow-500/10 via-transparent to-transparent opacity-30"></div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto text-center bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-16 shadow-[0_0_100px_rgba(251,191,36,0.3)] relative z-10"
+          className="max-w-4xl mx-auto text-center bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-16 shadow-[0_0_100px_rgba(251,191,36,0.3)] relative z-10"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-8">
             Готовы начать работу?
           </h2>
-          <p className="text-black text-xl mb-12 opacity-90">
+          <p className="text-black text-base sm:text-lg md:text-xl mb-8 sm:mb-12 opacity-90">
             Свяжитесь с нами для получения подробной консультации и расчета стоимости
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOrderFormOpen(true)}
-            className="bg-black text-white font-bold py-4 px-12 rounded-full text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+            className="w-full sm:w-auto bg-black text-white font-bold py-3 sm:py-4 px-8 sm:px-12 rounded-full text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
           >
             Заказать технику
           </motion.button>

@@ -87,6 +87,24 @@ body {
   .font-black-ops {
     letter-spacing: -0.02em;
   }
+
+  /* Улучшения для мобильной версии */
+  section {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    overflow-x: hidden;
+  }
+
+  /* Уменьшаем размер секций */
+  .py-32 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Улучшения для кнопок в мобильной версии */
+  a[href], button {
+    touch-action: manipulation;
+  }
 }
 
 /* Закругленные элементы */
