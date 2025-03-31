@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const contactInfo = [
   {
     title: "Адрес",
-    info: "г. Екатеринбург, ул. Строителей, 1",
+    info: "г. Екатеринбург, ул. Ткачей 23",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -16,7 +16,7 @@ const contactInfo = [
   },
   {
     title: "Телефон",
-    info: "+7 (343) 123-45-67",
+    info: "+7 (993) 907-30-77",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -25,7 +25,7 @@ const contactInfo = [
   },
   {
     title: "Email",
-    info: "info@specteh.ru",
+    info: "burkovmu@gmail.com",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -50,6 +50,11 @@ export default function Contacts() {
     phone: "",
     message: ""
   });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,13 +70,10 @@ export default function Contacts() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24 pb-24">
+    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24 pb-24 transform-gpu">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+        <div 
+          className={`text-center mb-16 transition-opacity duration-300 ${isMounted ? 'opacity-100' : 'opacity-0'}`}
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
             Контакты
@@ -79,19 +81,20 @@ export default function Contacts() {
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Свяжитесь с нами любым удобным способом или оставьте заявку, и мы перезвоним вам
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Контактная информация */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+          <div 
+            className={`transition-all duration-500 delay-100 transform ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
           >
             <div className="grid grid-cols-1 gap-8">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-center space-x-4 bg-gray-800 p-6 rounded-lg">
-                  <div className="flex-shrink-0 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-black">
+                <div 
+                  key={index} 
+                  className={`flex items-center space-x-4 bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg border border-gray-700/30 shadow-lg transition-all duration-300 delay-${(index + 1) * 100} transform ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+                >
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-black shadow-[0_0_15px_rgba(251,191,36,0.3)]">
                     {item.icon}
                   </div>
                   <div>
@@ -101,16 +104,13 @@ export default function Contacts() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Форма обратной связи */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="bg-gray-800 p-8 rounded-lg"
+          <div 
+            className={`bg-gray-800/80 backdrop-blur-sm p-8 rounded-lg border border-gray-700/30 shadow-lg transition-all duration-500 delay-200 transform ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
           >
-            <h2 className="text-2xl font-bold mb-6">Оставить заявку</h2>
+            <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Оставить заявку</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -123,7 +123,7 @@ export default function Contacts() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-700/80 border border-gray-600/50 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300"
                 />
               </div>
               <div>
@@ -137,7 +137,7 @@ export default function Contacts() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-700/80 border border-gray-600/50 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300"
                 />
               </div>
               <div>
@@ -151,7 +151,7 @@ export default function Contacts() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-700/80 border border-gray-600/50 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300"
                 />
               </div>
               <div>
@@ -164,38 +164,34 @@ export default function Contacts() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-700/80 border border-gray-600/50 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300 resize-none"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-6 rounded-lg hover:from-yellow-500 hover:to-orange-600 transition-colors duration-300"
+                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-6 rounded-lg hover:shadow-[0_0_30px_rgba(251,191,36,0.3)] transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
               >
                 Отправить
               </button>
             </form>
-          </motion.div>
+          </div>
         </div>
 
         {/* Карта */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-gray-800 p-8 rounded-lg mb-16"
+        <div 
+          className={`bg-gray-800/80 backdrop-blur-sm p-8 rounded-lg border border-gray-700/30 shadow-lg mb-16 transition-all duration-500 delay-300 transform ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <h2 className="text-2xl font-bold mb-6">Как нас найти</h2>
-          <div className="aspect-w-16 aspect-h-9">
+          <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Как нас найти</h2>
+          <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2181.5404264302287!2d60.61745731608055!3d56.85294798085752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c16e9f95905b5f%3A0x4b5b3b3b3b3b3b3b!2z0YPQuy4g0KHRgtGA0L7QuNGC0LXQu9C10LksIDEsINCV0LrQsNGC0LXRgNC40L3QsdGD0YDQsywg0KHQstC10YDQtNC70L7QstGB0LrQsNGPINC-0LHQuy4sIDYyMDAyNw!5e0!3m2!1sru!2sru!4v1621436000000!5m2!1sru!2sru"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2183.2736076772195!2d60.634060876972535!3d56.82260127322021!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c16c4fc49bfb0d%3A0xcf5b8be0aca82d25!2z0YPQuy4g0KLQutCw0YfQtdC5LCAyMywg0JXQutCw0YLQtdGA0LjQvdCx0YPRgNCzLCDQodCy0LXRgNC00LvQvtCy0YHQutCw0Y8g0L7QsdC7LiwgNjIwMDEz!5e0!3m2!1sru!2sru!4v1711989087168!5m2!1sru!2sru"
               className="w-full h-full rounded-lg"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </main>
   );

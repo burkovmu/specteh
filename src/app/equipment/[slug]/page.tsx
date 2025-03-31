@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import OrderForm from "@/components/OrderForm";
+import ImageViewer from "@/components/ImageViewer";
 
 interface Equipment {
   title: string;
@@ -406,6 +407,7 @@ const equipmentData: Equipment[] = [
 export default function EquipmentPage() {
   const params = useParams();
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
+  const [isImageViewerOpen, setIsImageViewerOpen] = useState(false);
   
   const equipment = equipmentData.find(item => item.slug === params.slug);
   
@@ -439,12 +441,19 @@ export default function EquipmentPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden relative">
+            <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden relative group cursor-pointer" onClick={() => setIsImageViewerOpen(true)}>
               <img
                 src={equipment.imageUrl}
                 alt={equipment.title}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="bg-white/10 backdrop-blur-sm p-3 rounded-full">
+                  <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -461,7 +470,7 @@ export default function EquipmentPage() {
             
             <button
               onClick={() => setIsOrderFormOpen(true)}
-              className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-orange-600 transition-colors"
+              className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-orange-600 transition-colors shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"
             >
               Заказать
             </button>
@@ -470,23 +479,23 @@ export default function EquipmentPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <div>
-            <h2 className="text-2xl font-bold mb-6">Технические характеристики</h2>
-            <div className="bg-gray-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Технические характеристики</h2>
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-white/5">
               {equipment.specifications?.map((spec, index) => (
                 <div
                   key={index}
-                  className="flex justify-between py-3 border-b border-gray-700 last:border-0"
+                  className="flex justify-between py-3 border-b border-gray-700/50 last:border-0"
                 >
                   <span className="text-gray-300">{spec.name}</span>
-                  <span className="font-semibold">{spec.value}</span>
+                  <span className="font-semibold text-yellow-400">{spec.value}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold mb-6">Подробное описание</h2>
-            <div className="bg-gray-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Подробное описание</h2>
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-white/5">
               <div className="prose prose-invert">
                 {equipment.fullDescription?.split('\n').map((paragraph, index) => (
                   <p key={index} className="mb-4 last:mb-0">
@@ -503,6 +512,13 @@ export default function EquipmentPage() {
           onClose={() => setIsOrderFormOpen(false)}
           equipmentTitle={equipment.title}
           isSimpleForm={false}
+        />
+
+        <ImageViewer 
+          isOpen={isImageViewerOpen}
+          onClose={() => setIsImageViewerOpen(false)}
+          imageUrl={equipment.imageUrl}
+          title={equipment.title}
         />
       </div>
     </main>

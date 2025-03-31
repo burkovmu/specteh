@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 interface OrderFormProps {
   isOpen: boolean;
@@ -38,26 +37,26 @@ export default function OrderForm({ isOpen, onClose, isSimpleForm = false, equip
   return (
     <div className="fixed inset-0 z-[200] overflow-y-auto">
       <div className="min-h-screen px-4 text-center flex items-center justify-center">
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose}></div>
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-200"
+          onClick={onClose}
+        ></div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.2 }}
-          className="relative bg-gradient-to-b from-gray-900 to-black w-full max-w-md rounded-2xl p-8 shadow-2xl border border-white/10"
+        <div
+          className="relative bg-gray-900 w-full max-w-md rounded-lg p-6 shadow-xl overflow-hidden transition-all duration-300 opacity-100 translate-y-0"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/5 to-orange-500/5 rounded-2xl"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_110%_-10%,rgba(251,191,36,0.1),transparent_50%)] rounded-2xl"></div>
+          <div className="absolute inset-0 rounded-lg overflow-hidden">
+            <div className="absolute inset-0 border border-yellow-400/20 rounded-lg"></div>
+          </div>
           
           <div className="relative">
             <button
               onClick={onClose}
-              className="absolute -top-2 -right-2 p-2 rounded-xl hover:bg-white/5 transition-colors group"
+              className="absolute top-0 right-0 text-gray-400 hover:text-yellow-400 transition-colors"
               aria-label="Закрыть"
             >
               <svg 
-                className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" 
+                className="w-5 h-5" 
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
@@ -71,44 +70,44 @@ export default function OrderForm({ isOpen, onClose, isSimpleForm = false, equip
               </svg>
             </button>
 
-            <h2 className="text-2xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500 text-center">
+            <h2 className="text-xl font-medium mb-6 text-white text-left">
               {isSimpleForm ? "Заказать звонок" : "Заказать технику"}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-5">
-                <div className="relative">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-4">
+                <div className="relative opacity-100 translate-y-0 transition-all duration-300">
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Ваше имя"
-                    className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:bg-white/[0.07] transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-md bg-gray-800/90 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/50 transition-all"
                     required
                   />
                 </div>
 
-                <div className="relative">
+                <div className="relative opacity-100 translate-y-0 transition-all duration-300">
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="Ваш телефон"
-                    className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:bg-white/[0.07] transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-md bg-gray-800/90 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/50 transition-all"
                     required
                   />
                 </div>
 
                 {!isSimpleForm && (
                   <>
-                    <div className="relative">
+                    <div className="relative opacity-100 translate-y-0 transition-all duration-300">
                       <select
                         name="equipment"
                         value={formData.equipment}
                         onChange={(e) => setFormData({ ...formData, equipment: e.target.value })}
-                        className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-gray-400 focus:outline-none focus:border-yellow-400/50 focus:bg-white/[0.07] transition-all duration-300"
+                        className="w-full px-4 py-3 rounded-md bg-gray-800/90 border border-gray-700 text-white focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/50 transition-all"
                         required
                       >
                         <option value="">Выберите тип техники</option>
@@ -120,31 +119,35 @@ export default function OrderForm({ isOpen, onClose, isSimpleForm = false, equip
                       </select>
                     </div>
 
-                    <div className="relative">
+                    <div className="relative opacity-100 translate-y-0 transition-all duration-300">
                       <textarea
                         name="message"
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder="Дополнительная информация"
                         rows={3}
-                        className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:bg-white/[0.07] transition-all duration-300 resize-none"
+                        className="w-full px-4 py-3 rounded-md bg-gray-800/90 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/50 transition-all resize-none"
                       />
                     </div>
                   </>
                 )}
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-4 px-6 rounded-xl text-lg shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:shadow-[0_0_50px_rgba(251,191,36,0.5)] transition-all duration-300"
-              >
-                {isSimpleForm ? "Заказать звонок" : "Отправить заявку"}
-              </motion.button>
+              <div className="opacity-100 translate-y-0 transition-all duration-300">
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-medium py-3 px-4 rounded-md text-sm transition-all shadow-md hover:shadow-lg"
+                >
+                  {isSimpleForm ? "Заказать звонок" : "Отправить заявку"}
+                </button>
+              </div>
+              
+              <p className="text-xs text-gray-400 text-center mt-4 opacity-70">
+                Отправляя форму, вы соглашаетесь с политикой конфиденциальности
+              </p>
             </form>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
