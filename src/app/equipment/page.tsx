@@ -138,7 +138,7 @@ function EquipmentContent() {
         className="text-center mb-16"
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
-          Каталог спецтехники
+          Каталог техники
         </h1>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
           Предлагаем в аренду современную строительную и грузовую технику от ведущих производителей. 
@@ -212,7 +212,7 @@ function EquipmentContent() {
 
       {/* Информационный блок */}
       <div className="bg-gray-800 rounded-lg p-8 mb-16">
-        <h2 className="text-2xl font-bold mb-4">Условия аренды спецтехники</h2>
+        <h2 className="text-2xl font-bold mb-4">Условия аренды строительной техники УРАЛСТРОЙТЕХ</h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <h3 className="text-xl font-semibold mb-3 text-yellow-400">Что входит в стоимость:</h3>
