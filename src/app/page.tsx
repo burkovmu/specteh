@@ -77,6 +77,7 @@ export default function Home() {
         </div>
 
         {/* Контент */}
+        <meta name="telderi" content="92ee23f96344fe06bd64caf67b8e881c" />
         <div className="relative z-10 px-4 max-w-7xl mx-auto w-full">
           <div className={`text-center ${isLoaded ? 'content-fade-in' : 'opacity-0'}`}>
             <div className="mb-6 sm:mb-8">
